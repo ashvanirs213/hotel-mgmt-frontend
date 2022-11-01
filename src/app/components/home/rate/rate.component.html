@@ -1,0 +1,153 @@
+<div class="container-fluid g-0" >
+    
+    
+    
+    <main >
+        <div class="toolbar">
+            <div class="add-room">
+                <button type="button" class="btn btn-outline-success btn-lg"
+                data-bs-toggle="modal" data-bs-target="#exampleModal">Add Payment</button>
+            </div>
+           
+        </div>
+        <div class="rooms black-border">
+            <div class="row mt-5" *ngIf="RateList == 0">
+                <div class="col text-center">
+                    <span class="text-secondary fs-2 fw-bold fst-italic">There are No Payments Added!</span>
+                </div>
+            </div>
+
+            <div class="row " >
+              
+                <div class="container-fluid g-0 p-2 " >
+                    <div class="row g-2" *ngFor="let room of RateList" >
+                        <div class="col-md-2 d-flex justify-content-center align-items-center">
+                            <img src="../../../../assets/Images/download (1).jpg" alt="Profile Image" class="profile">
+                        </div>
+                        <div class="col ps-2">
+                            <div class="row g-0">
+                                <div class="col-md-10 text-center">
+                                    <span class="name">Rates</span>
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                    <div class="btn-group" role="group">
+                                        
+                                        <button type="button" class="btn btn-outline-danger" (click)="DeleteRate(room.rate_id)">Delete</button>
+                                    </div>
+                                </div>
+                
+                            </div>
+                
+                            <div class="row g-0 mt-3"  >
+                                <div class="col-md">
+                                    <table class="table table-hover mx-auto">
+                                        <tbody >
+                                            <tr >
+                                                <td>No of Days</td>
+                                                <td>{{room.no_of_Days}}</td>
+                                            </tr>
+                                            <tr >
+                                                <td>Extension Price</td>
+                                                <td>{{room.extensionPrice}}</td>
+                                            </tr>
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col">
+                                    <table class="table table-hover mx-auto">
+                                        <tbody >
+                                            
+                                            <tr >
+                                                <td>Per night Price</td>
+                                                <td>{{room.perNightPrice}}</td>
+                                            </tr>
+                                            <tr >
+                                                <td>Total amount</td>
+                                                <td>{{room.totalAmount}}</td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+
+        </div>
+        <div>
+            <button   class="btn btn-primary" (click)="GetAllRate()">Show All </button>
+          </div>
+          
+    </main>
+</div>
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Enter Rate Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="rateForm" (ngSubmit)="RateSubmited()">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="No of Days" formControlName="no_of_Days">
+                        
+                    </div>
+    
+                    <div class="col">
+                       
+                        <input type="text" class="form-control" placeholder="Extension Price" formControlName="extensionPrice">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Per Night Price" formControlName="perNightPrice">
+                        
+                    </div>
+    
+                    <div class="col">
+                       
+                        <input type="text" class="form-control" placeholder="Total Amount" formControlName="totalAmount">
+                    </div>
+                </div>
+
+
+
+
+
+
+                
+                   
+    
+               
+    
+                
+                <div class="modal-footer">
+          
+         
+                    <button type="submit" [disabled]="rateForm.invalid" class="btn btn-primary">Submit</button>
+                  </div>
+
+                 
+            
+          </form>
+
+        </div>
+        
+       
+      </div>
+    </div>
+    
+  </div>

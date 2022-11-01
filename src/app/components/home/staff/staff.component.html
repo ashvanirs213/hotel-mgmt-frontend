@@ -1,0 +1,168 @@
+
+    <div class="container-fluid g-0">
+        <main >
+        <div class="toolbar">
+            <div class="add-room">
+                <button type="button" class="btn btn-outline-success btn-lg"
+                data-bs-toggle="modal" data-bs-target="#exampleModal">Add Staff</button>
+            </div>
+           
+        </div>
+        <div class="rooms black-border">
+            <div class="row mt-5" *ngIf="StaffList == 0">
+                <div class="col text-center">
+                    <span class="text-secondary fs-2 fw-bold fst-italic">There are No Staffs Added!</span>
+                </div>
+            </div>
+
+            <div class="row " >
+              
+                <div class="container-fluid g-0 p-2 " >
+                    <div class="row g-2" *ngFor="let staff of StaffList" >
+                        <div class="col-md-2 d-flex justify-content-center align-items-center">
+                            <img src="../../../../assets/Images/staff.jpg" alt="Profile Image" class="profile">
+                        </div>
+                        <div class="col ps-2">
+                            <div class="row g-0">
+                                <div class="col-md-10 text-center">
+                                    <span class="name">Staffs</span>
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                    <div class="btn-group" role="group">
+                                        
+                                        <button type="button" class="btn btn-outline-danger" (click)="DeleteStaff(staff.staffId)">Delete</button>
+                                    </div>
+                                </div>
+                
+                            </div>
+                
+                            <div class="row g-0 mt-3"  >
+                                <div class="col-md">
+                                    <table class="table table-hover mx-auto">
+                                        <tbody >
+                                            <tr >
+                                                <td>Staff Name</td>
+                                                <td>{{staff.staffName}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Address</td>
+                                                <td>{{staff.address}}</td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col">
+                                    <table class="table table-hover mx-auto">
+                                        <tbody>
+                                            <tr>
+                                                <td>Salary</td>
+                                                <td>{{staff.salary}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Age</td>
+                                                <td>{{staff.age}}</td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+
+        </div>
+        <div>
+            <button   class="btn btn-primary" (click)="GetAllStaff()">Show All Staffs</button>
+          </div>
+    </main>
+    </div>
+
+
+  
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Enter Staff Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="staffForm" (ngSubmit)="staffSubmited()">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Staff Name" formControlName="staffName">
+                        <div class="form-text text-danger" 
+              *ngIf="StaffName.errors?.['required']
+              && (StaffName.touched || StaffName.dirty)"> 
+                Staff Name is Required.
+            </div>
+                    </div>
+    
+                    <div class="col">
+                        <div class="form-text text-danger" 
+              *ngIf="Email.errors?.['required']
+              && (Email.touched || Email.dirty)"> 
+                Email is Required.
+            </div>
+                        <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col">
+                        <h6 class="text-secondary fst-italic">Personal Information</h6>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Age" formControlName="age">
+                        <div class="form-text text-danger" 
+              *ngIf="Age.errors?.['required']
+              && (Age.touched || Age.dirty)"> 
+                Age is Required.
+            </div>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Address" formControlName="address">
+                        <div class="form-text text-danger" 
+              *ngIf="Address.errors?.['required']
+              && (Address.touched || Address.dirty)"> 
+                Address is Required.
+            </div>
+                    </div>
+                </div>
+    
+               
+    
+                <div class="row">
+                
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Salary" formControlName="salary">
+                        <div class="form-text text-danger" 
+              *ngIf="Salary.errors?.['required']
+              && (Salary.touched || Salary.dirty)"> 
+                Salary is Required.
+            </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+          
+         
+                    <button type="submit" [disabled]="staffForm.invalid" class="btn btn-primary">Submit</button>
+                  </div>
+
+                  
+          </form>
+
+        </div>
+       
+      </div>
+    </div>
+    </div>

@@ -1,0 +1,180 @@
+<div class="container-fluid g-0" >
+   
+    
+    
+    <main >
+        <div class="toolbar">
+            <div class="add-room">
+                <button type="button" class="btn btn-outline-success btn-lg"
+                data-bs-toggle="modal" data-bs-target="#exampleModal">Add Reservation</button>
+            </div>
+           
+        </div>
+        <div class="rooms black-border">
+            <div class="row mt-5" *ngIf="RevList == 0">
+                <div class="col text-center">
+                    <span class="text-secondary fs-2 fw-bold fst-italic">There are No Reservation Added!</span>
+                </div>
+            </div>
+
+            <div class="row " >
+              
+                <div class="container-fluid g-0 p-2 " >
+                    <div class="row g-2" *ngFor="let staff of RevList" >
+                        <div class="col-md-2 d-flex justify-content-center align-items-center">
+                            <img src="../../../../assets/Images/staff.jpg" alt="Profile Image" class="profile">
+                        </div>
+                        <div class="col ps-2">
+                            <div class="row g-0">
+                                <div class="col-md-10 text-center">
+                                    <span class="name">Reservations</span>
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                    <div class="btn-group" role="group">
+                                   
+                                        <button type="button" class="btn btn-outline-danger" (click)="DeleteRev(staff.id)">Delete</button>
+                                    </div>
+                                </div>
+                
+                            </div>
+                
+                            <div class="row g-0 mt-3"  >
+                                <div class="col-md">
+                                    <table class="table table-hover mx-auto">
+                                        <tbody >
+                                            <tr >
+                                                <td>Check-in Date</td>
+                                                <td>{{staff.checkin_date}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Check-out Date</td>
+                                                <td>{{staff.checkout_date}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>No of Adults</td>
+                                                <td>{{staff.no_of_adults}}</td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col">
+                                    <table class="table table-hover mx-auto">
+                                        <tbody>
+                                            <tr>
+                                                <td>No of Rooms</td>
+                                                <td>{{staff.no_of_rooms}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phone Number</td>
+                                                <td>{{staff.phnNumber}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>No of Child</td>
+                                                <td>{{staff.no_of_children}}</td>
+                                            </tr>
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+
+        </div>
+        <div>
+            <button   class="btn btn-primary btn-lg" (click)="GetAllRev()">Show All Reservations</button>
+          </div>
+          <br>
+          <div>
+            <button class="btn btn-primary btn-lg" routerLink="/rate">Payment Page</button>
+          </div>
+    </main>
+    </div>
+
+
+  
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Enter Reservation Information</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="revForm" (ngSubmit)="RevSubmited()">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="No of Adults" formControlName="no_of_adults">
+                        <div class="form-text text-danger" 
+              *ngIf="no_of_adults.errors?.['required']
+              && (no_of_adults.touched || no_of_adults.dirty)"> 
+                Adult is Required.
+            </div>
+                    </div>
+    
+                    <div class="col">
+                        
+                        <input type="text" class="form-control" placeholder="No of Child" formControlName="no_of_children">
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col">
+                        <h6 class="text-secondary fst-italic">Duration</h6>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Checkin_date" formControlName="checkin_date">
+                        <div class="form-text text-danger" 
+              *ngIf="checkin_date.errors?.['required']
+              && (checkin_date.touched || checkin_date.dirty)"> 
+                Checkin is Required.
+            </div>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Checkout_date" formControlName="checkout_date">
+                        <div class="form-text text-danger" 
+              *ngIf="checkout_date.errors?.['required']
+              && (checkout_date.touched || checkout_date.dirty)"> 
+                Checkout is Required.
+            </div>
+                    </div>
+                </div>
+    
+               
+    
+                <div class="row">
+                
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="No of Rooms" formControlName="no_of_rooms">
+                       
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Phone Number" formControlName="phnNumber">
+                       
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+          
+         
+                    <button type="submit" [disabled]="revForm.invalid" class="btn btn-primary">Submit</button>
+                  </div>
+
+                  
+          </form>
+
+        </div>
+       
+        </div>
+        </div>
+    </div>
